@@ -4,34 +4,31 @@ import os
 
 def division_error():
     """
-    Simulates division by randomly choosing a denominator that might be zero.
-    If the denominator is zero, it catches the ZeroDivisionError and prints an error message.
-    Returns the result of the division if successful, or None if an error occurred.
+    Simulates division by randomly selecting a numerator and a denominator.
+    Handles division by zero by catching the ZeroDivisionError.
+    Returns the result if division is successful, or None if division by zero occurs.
     """
     numerator = random.randint(1, 10)
+    # Ensure denominator is not zero to prevent division by zero error
+    denominator = random.choice([0, random.randint(1, 10)])
     try:
-        denominator = random.choice([0, random.randint(1, 10)])  # Sometimes will divide by 0
         result = numerator / denominator
         return result
     except ZeroDivisionError:
-        print("Cannot divide by zero.")
+        print("Attempted division by zero. Returning None.")
         return None
 
 def file_read_error():
     """
-    Attempts to read a file that may not exist.
-    If the file doesn't exist, it catches the FileNotFoundError and prints an error message.
-    If the file is read successfully, it prints the content of the file.
+    Attempts to read content from a non-existent file.
+    Handles the FileNotFoundError to prevent crash.
+    Prints an error message if the file is not found.
     """
     try:
         with open("non_existent_file.txt", "r") as file:
             content = file.read()
-            print(content)
+            return content
     except FileNotFoundError:
-        print("File not found.")
-
-# Example usage
-if __name__ == "__main__":
-    print(division_error())
-    file_read_error()
+        print("File not found. Please check the filename and try again.")
+        return None
 ```
